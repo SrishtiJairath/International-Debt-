@@ -1,0 +1,32 @@
+# Sample Problems using Query on the dataset on International debt
+#Retrieving content from the table
+#SELECT * FROM `bigquery-public-data.world_bank_intl_debt.international_debt` 
+#How many countries there are in this dataset?
+#SELECT count(distinct(Country_name)) From `bigquery-public-data.world_bank_intl_debt.international_debt`
+#result 134
+#Extracting Data for country India
+#SELECT * FROM `bigquery-public-data.world_bank_intl_debt.international_debt` WHERE Country_code="IND"
+#All content for India extracted
+#what is PPG,Private creditors(DIS,Current US$)
+#SELECT * FROM `bigquery-public-data.world_bank_intl_debt.international_debt`
+#WHERE INDICATOR_name lIKE "PPG, bonds (AMT, current US$)" AND Country_code="IND"
+#The data with the indicator in question for India  for all the years is extracted
+#To find the highest two values in the data set
+#SELECT * FROM `bigquery-public-data.world_bank_intl_debt.international_debt`
+#ORDER BY value DESC
+# Result-2.82588776380909E13,2.77257422546628E13,2.70145680262737E13
+#What is the average value of GNI for India
+#SELECT AVG(value) from `bigquery-public-data.world_bank_intl_debt.international_debt` WHERE indicator_name="GNI (current US$)" AND Country_code="IND" 
+#Result 6.439107199062778E11
+#Which are the cpuntries with the highest debt?
+#SELECT Country_name FROM `bigquery-public-data.world_bank_intl_debt.international_debt` order By value
+#Result Afghanistan
+#
+#SELECT count(distinct(Country_name)) From `bigquery-public-data.world_bank_intl_debt.international_debt` Group By year
+#Result 134 
+#Extracted commen content from country defintions from country summary 
+SELECT `bigquery-public-data.world_bank_intl_education.country_summary`.country_code  
+FROM `bigquery-public-data.world_bank_intl_education.country_summary`
+INNER JOIN  `bigquery-public-data.world_bank_intl_education.country_series_definitions`  
+ON `bigquery-public-data.world_bank_intl_education.country_summary`.country_code =`bigquery-public-data.world_bank_intl_education.country_series_definitions` .country_code
+#result first row GIB,LAST ROW DMA 
